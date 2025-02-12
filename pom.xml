@@ -13,7 +13,7 @@
 	<version>0.0.1</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>Demo project for Spring Boot</description>
-	<url>https://github.com/felixgilioli/starter-bff-template-engine</url>
+	<url>https://github.com/felixgilioli/starter-bff</url>
 	<licenses>
 		<license>
 			<name>MIT License</name>
@@ -29,9 +29,9 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:git:git://github.com/felixgilioli/starter-bff-template-engine.git</connection>
-		<developerConnection>scm:git:ssh://github.com:felixgilioli/starter-bff-template-engine.git</developerConnection>
-		<url>http://github.com/felixgilioli/starter-bff-template-engine/tree/main</url>
+		<connection>scm:git:git://github.com/felixgilioli/starter-bff.git</connection>
+		<developerConnection>scm:git:ssh://github.com:felixgilioli/starter-bff.git</developerConnection>
+		<url>http://github.com/felixgilioli/starter-bff/tree/main</url>
 	</scm>
 	<properties>
 		<java.version>21</java.version>
