@@ -54,7 +54,7 @@ public @interface ResponseExample {
      *
      * @return the class of data used for generating the JSON
      */
-    Class<? extends DocumentationData> data();
+    Class<? extends DocumentationData> data() default DefaultDocData.class;
 
     /**
      * HTTP status code for the response example.

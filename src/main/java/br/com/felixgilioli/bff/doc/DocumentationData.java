@@ -13,10 +13,10 @@ package br.com.felixgilioli.bff.doc;
  * </p>
  *
  * <pre>
- * public class OrderCancelledDoc implements DocumentationData {
+ * public class OrderCancelledDoc implements DocumentationData&lt;Order&gt; {
  *
  *     &#64;Override
- *     public Object getData() {
+ *     public Order getData() {
  *         return new Order(
  *                 1L,
  *                 BigDecimal.TEN,
@@ -26,7 +26,7 @@ package br.com.felixgilioli.bff.doc;
  * }
  * </pre>
  */
-public interface DocumentationData {
+public interface DocumentationData<T> {
 
     /**
      * Returns a predefined object to be used as a parameter
@@ -34,5 +34,5 @@ public interface DocumentationData {
      *
      * @return an object with preset values for template processing
      */
-    Object getData();
+    T getData();
 }
