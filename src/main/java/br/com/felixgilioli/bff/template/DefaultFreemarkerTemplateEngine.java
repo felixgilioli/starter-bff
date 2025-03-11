@@ -6,8 +6,6 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 
@@ -21,16 +19,9 @@ public class DefaultFreemarkerTemplateEngine implements TemplateEngine {
 
     @PostConstruct
     public void init() {
-        try {
-            this.freemarkerConfiguration = new Configuration(Configuration.VERSION_2_3_34);
-            freemarkerConfiguration.setDirectoryForTemplateLoading(new File(getTemplatesDirectory()));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private String getTemplatesDirectory() {
-        return "src/main/resources/" + templateDirectory.replaceFirst("^/", "");
+        this.freemarkerConfiguration = new Configuration(Configuration.VERSION_2_3_34);
+        freemarkerConfiguration.setClassForTemplateLoading(getClass(), "/" + templateDirectory.replaceFirst("^/", ""));
+        freemarkerConfiguration.setDefaultEncoding("UTF-8");
     }
 
     @Override

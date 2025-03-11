@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.felixgilioli</groupId>
 	<artifactId>starter-bff</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.5</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>Demo project for Spring Boot</description>
 	<url>https://github.com/felixgilioli/starter-bff</url>
