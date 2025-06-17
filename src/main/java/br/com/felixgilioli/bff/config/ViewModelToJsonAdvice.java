@@ -22,7 +22,12 @@ public class ViewModelToJsonAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
-        return ViewModel.class.isAssignableFrom(returnType.getParameterType());
+        try {
+            return ViewModel.class.isAssignableFrom(returnType.getParameterType()) ||
+                    returnType.getGenericParameterType().getTypeName().contains(ViewModel.class.getName());
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
