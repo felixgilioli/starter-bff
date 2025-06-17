@@ -1,8 +1,7 @@
 package br.com.felixgilioli.bff.doc;
 
 import br.com.felixgilioli.bff.template.TemplateEngine;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import br.com.felixgilioli.bff.utils.JsonUtils;
 import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.examples.Example;
 import io.swagger.v3.oas.models.media.Content;
@@ -62,7 +61,7 @@ public class OpenApiTemplateEngineCustomizer implements OperationCustomizer {
                         isNotBlank(responseExample.description())
                                 ? responseExample.description()
                                 : "Example " + exampleNumber++,
-                        new Example().value(toJson(jsonString))
+                        new Example().value(JsonUtils.readTree(jsonString))
                 );
 
             }
@@ -82,11 +81,5 @@ public class OpenApiTemplateEngineCustomizer implements OperationCustomizer {
         }
     }
 
-    public Object toJson(String jsonString) {
-        try {
-            return new ObjectMapper().readTree(jsonString);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 }
