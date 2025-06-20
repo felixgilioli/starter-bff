@@ -22,9 +22,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class OpenApiTemplateEngineCustomizer implements OperationCustomizer {
 
     private final TemplateEngine templateEngine;
+    private final ResponseExampleDescriptionFormatter responseExampleDescriptionFormatter;
 
-    public OpenApiTemplateEngineCustomizer(TemplateEngine templateEngine) {
+    public OpenApiTemplateEngineCustomizer(TemplateEngine templateEngine,
+                                           ResponseExampleDescriptionFormatter responseExampleDescriptionFormatter) {
         this.templateEngine = templateEngine;
+        this.responseExampleDescriptionFormatter = responseExampleDescriptionFormatter;
     }
 
     @Override
@@ -55,13 +58,16 @@ public class OpenApiTemplateEngineCustomizer implements OperationCustomizer {
             int exampleNumber = 1;
 
             for (ResponseExample responseExample : responsesByStatus.get(status)) {
-                var jsonString = templateEngine.getTemplate(responseExample.template(), getDocumentationData(responseExample).getData());
+                var documentationData = getDocumentationData(responseExample);
+                var jsonString = templateEngine.getTemplate(responseExample.template(), documentationData.getData());
 
                 mediaType.addExamples(
                         isNotBlank(responseExample.description())
                                 ? responseExample.description()
                                 : "Example " + exampleNumber++,
-                        new Example().value(JsonUtils.readTree(jsonString))
+                        new Example()
+                                .description(responseExampleDescriptionFormatter.format(documentationData).orElse(null))
+                                .value(JsonUtils.readTree(jsonString))
                 );
 
             }

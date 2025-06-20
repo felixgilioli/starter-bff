@@ -1,5 +1,7 @@
 package br.com.felixgilioli.bff.doc;
 
+import java.util.List;
+
 /**
  * Represents a contract for providing predefined data to be used
  * as parameters in JSON generation through a template engine.
@@ -35,4 +37,16 @@ public interface DocumentationData<T> {
      * @return an object with preset values for template processing
      */
     T getData();
+
+
+    /**
+     * Returns a list of example images that can be used in documentation.
+     * Each image is represented by a {@link DocumentationExampleImage} object.
+     *
+     * @return a list of example images, or an empty list if none are available
+     */
+    default List<DocumentationExampleImage> getExampleImages() {
+        return List.of();
+    }
+
 }
